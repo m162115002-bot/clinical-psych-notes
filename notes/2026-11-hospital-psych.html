@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>住院情境、醫療程序與病患心理適應 | 臨床心理學課程講義速版</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #faf8f5;
+      --bg-card: #fffefc;
+      --text-primary: #4a4542;
+      --text-secondary: #7c746e;
+      --border: #ebe5dd;
+      --primary: #c98a8a;
+      --primary-light: #f6eaea;
+      --mint-bg: #e2f1ee;
+      --mint-text: #4d7870;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Zen Maru Gothic", "Noto Sans TC", -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-main);
+      background-image: radial-gradient(#e6dfd5 1px, transparent 1px);
+      background-size: 24px 24px;
+      color: var(--text-primary);
+      line-height: 1.8;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 840px; margin: 0 auto; background: var(--bg-card);
+      padding: 38px 42px; border-radius: 24px; border: 1.5px solid var(--border);
+      box-shadow: 0 8px 24px rgba(138, 121, 108, 0.06);
+    }
+    .nav-back {
+      display: inline-block; margin-bottom: 20px; color: #a86b6b;
+      text-decoration: none; font-weight: 500; font-size: 0.92rem;
+      background: #f6eaea; padding: 6px 14px; border-radius: 999px; transition: all 0.2s;
+    }
+    .nav-back:hover { background: #eedada; }
+    .badge-health {
+      display: inline-block; background: var(--mint-bg); color: var(--mint-text);
+      font-size: 0.8rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; margin-bottom: 12px;
+    }
+    h1 { font-size: 1.72rem; line-height: 1.4; margin-bottom: 8px; }
+    .meta { color: #a89f97; font-size: 0.88rem; margin-bottom: 26px; }
+
+    .definition-box {
+      background: #f1f7f6; border: 1.5px dashed #b8d4cf;
+      padding: 20px 24px; border-radius: 16px; margin-bottom: 30px;
+    }
+    .definition-box strong { color: var(--mint-text); display: block; margin-bottom: 6px; font-size: 0.98rem; }
+
+    h2 {
+      font-size: 1.25rem; margin: 32px 0 14px; padding-bottom: 8px;
+      border-bottom: 2px dashed var(--border); color: var(--text-primary);
+    }
+    .key-points { padding-left: 22px; margin-bottom: 26px; }
+    .key-points li { margin-bottom: 12px; }
+    .key-points strong { color: var(--mint-text); }
+
+    .table-wrap { border-radius: 16px; overflow: hidden; border: 1.5px solid var(--border); margin: 16px 0 30px; }
+    .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.94rem; }
+    .comparison-table th, .comparison-table td { border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); padding: 13px 15px; text-align: left; }
+    .comparison-table th:last-child, .comparison-table td:last-child { border-right: none; }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .comparison-table th { background: #f7f3ed; font-weight: 700; color: #5c534c; }
+
+    .quiz-scoreboard {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+      background: #f7f3ed; border: 1.5px solid var(--border);
+      padding: 14px 20px; border-radius: 16px; margin-bottom: 20px;
+      position: sticky; top: 14px; z-index: 10;
+      box-shadow: 0 4px 14px rgba(138, 121, 108, 0.08);
+    }
+    .score-info { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); }
+    .score-highlight { color: #a86b6b; font-size: 1.08rem; }
+    .reset-btn {
+      background: #fffefc; border: 1.5px solid #d8c3b8; color: #7c746e;
+      padding: 6px 14px; border-radius: 999px; cursor: pointer; font-family: inherit;
+      font-size: 0.85rem; font-weight: 500; transition: all 0.2s;
+    }
+    .reset-btn:hover { background: var(--primary-light); color: #a86b6b; border-color: var(--primary); }
+
+    .mcq-card {
+      background: #f9f7f4; border: 1.5px solid var(--border);
+      border-radius: 18px; padding: 22px 24px; margin-bottom: 18px;
+      transition: border-color 0.2s;
+    }
+    .mcq-question { font-size: 1.02rem; font-weight: 700; margin-bottom: 14px; color: var(--text-primary); line-height: 1.6; }
+    .mcq-options { display: flex; flex-direction: column; gap: 9px; }
+    .mcq-opt-btn {
+      text-align: left; background: #fffefc; border: 1.5px solid var(--border);
+      padding: 11px 16px; border-radius: 12px; cursor: pointer;
+      font-family: inherit; font-size: 0.94rem; color: var(--text-primary);
+      transition: all 0.2s; line-height: 1.5;
+    }
+    .mcq-opt-btn:hover:not(:disabled) {
+      border-color: var(--primary); background: #fdf6f6;
+    }
+    .mcq-opt-btn:disabled { cursor: default; }
+    .mcq-opt-btn.correct {
+      background: #e5efe8 !important; border-color: #8ab59b !important;
+      color: #3b5947 !important; font-weight: 700;
+    }
+    .mcq-opt-btn.wrong {
+      background: #f6eaea !important; border-color: #d69696 !important;
+      color: #9c5252 !important;
+    }
+    .mcq-explanation {
+      display: none; margin-top: 14px; padding: 14px 16px;
+      background: #fffefc; border-radius: 12px; border: 1px dashed #d5ccc2;
+      font-size: 0.92rem; color: var(--text-secondary); line-height: 1.65;
+    }
+    .mcq-explanation strong { color: var(--mint-text); }
+
+    /* 最底部簡報下載專區 */
+    .download-box {
+      margin-top: 38px;
+      background: linear-gradient(135deg, #f9f1f1 0%, #f1f7f6 100%);
+      border: 1.5px dashed #d5bfb9;
+      border-radius: 20px;
+      padding: 26px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+    .download-info h3 {
+      font-size: 1.12rem; color: var(--text-primary); margin-bottom: 6px;
+    }
+    .download-info p {
+      font-size: 0.9rem; color: var(--text-secondary);
+    }
+    .download-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--primary); color: #ffffff; text-decoration: none;
+      padding: 12px 24px; border-radius: 999px; font-weight: 700; font-size: 0.95rem;
+      box-shadow: 0 5px 15px rgba(201, 138, 138, 0.32);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .download-btn:hover {
+      background: #b87777; transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../index.html" class="nav-back">← 返回講義目錄</a>
+    <div><span class="badge-health">健康心理學</span></div>
+    <h1>住院情境、醫療程序與病患心理適應（Sarafino Ch.10）</h1>
+    <div class="meta">更新日期：2026-11-13 ｜ 來源：Sarafino《Health Psychology》Ch.10 (pp. 260-287)</div>
+
+    <div class="definition-box">
+      <strong>✿ 一句話秒懂定義</strong>
+      住院環境常剝奪病患的隱私與控制感，引發焦慮、習得無助或心理抗拒；健康心理學透過「資訊、認知、行為」三種控制感介入與適配個人因應風格，能顯著降低術前焦慮與生理併發症。
+    </div>
+
+    <h2>📌 關鍵考點條列</h2>
+    <ul class="key-points">
+      <li><strong>去個人化 (Depersonalization) 與醫護過勞 (Burnout)：</strong>醫護人員在高壓與情緒負荷下，可能將病患視為「待修的物體（nonperson treatment）」以自我保護；長期過勞包含<strong>情緒耗竭、去個人化、個人成就感低落</strong>三大向度（護士最低去個人化，醫師最高成就感）。</li>
+      <li><strong>「好病人」與「問題病人」的雙面刃：</strong>順從安靜的「好病人」雖受醫護喜愛，卻可能因缺乏控制感而陷入<strong>習得無助與憂鬱</strong>（住院憂鬱會顯著提高死亡率）；非重症卻不斷抱怨不配合的「問題病人」，常源於自由受限引發的<strong>心理抗拒 (Reactance)</strong>。</li>
+      <li><strong>術前心理準備的三大控制感：</strong>術前高焦慮會惡化術後疼痛與復原。有效介入包含<strong>行為控制</strong>（如深呼吸、咳嗽技巧）、<strong>認知控制</strong>（聚焦手術正向益處，如 Langer et al. 研究）與<strong>資訊控制</strong>（預告流程與感官體驗，如 Anderson 心臟繞道手術研究可將術後急性高血壓從 75% 降至 40%）。</li>
+      <li><strong>兒童住院的發展差異與分離焦慮：</strong>短暫分離痛苦在<strong>約 15 個月大時達到高峰</strong>（Bowlby 提出抗議→絕望階段）；學齡前兒童常誤認生病是「不乖的懲罰」；父母陪伴（room-in）、手術示範影片（如 <em>Ethan Has an Operation</em>）與轉移注意力（非空泛說「別擔心」）最能減輕恐懼。</li>
+      <li><strong>醫療心理衡鑑工具與末期照護：</strong>除 MMPI-2（特別關注 Hs-D-Hy 慮病、憂鬱、歇斯底里三量表）外，專為內科病患設計的量表包括 <strong>MBMD</strong>（評估因應風格與醫囑順從度）與 <strong>PAIS</strong>（評估疾病對職業、家庭、性生活等七大社會心理適應領域）。</li>
+    </ul>
+
+    <h2>⚖️ 易混淆概念對照表</h2>
+    <div class="table-wrap">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>比較面向</th>
+            <th>監控型因應者 (Monitors / 注意策略)</th>
+            <th>鈍化型因應者 (Blunters / 逃避策略)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>面對威脅資訊的傾向</strong></td>
+            <td>主動尋求細節、高度警覺（「我想知道所有細節」）</td>
+            <td>迴避、否認、壓抑威脅資訊（「我不想知道」）</td>
+          </tr>
+          <tr>
+            <td><strong>Miller &amp; Mangan (1983) 實驗結果</strong></td>
+            <td>給予<strong>詳盡資訊 (High Info)</strong> 時，檢查後脈搏最低、壓力最小；資訊不足反而焦慮。</td>
+            <td>給予<strong>極少資訊 (Low Info)</strong> 時，壓力最小；強迫給予詳盡資訊反而導致脈搏居高不下。</td>
+          </tr>
+          <tr>
+            <td><strong>臨床心理準備啟示</strong></td>
+            <td colspan="2">心理準備必須<strong>「適配 (Match) 病患的因應風格」</strong>；不過 Shipley 等人發現，若讓逃避型病患<strong>多次重複觀看（3次）</strong>衛教影片，也能有效降低其焦慮。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>✍️ 自我檢測小題（20 題互動選擇題庫）</h2>
+    <div class="quiz-scoreboard">
+      <div class="score-info">
+        ✿ 練習進度：<span id="answered-count" class="score-highlight">0</span> / 20 題 ｜ 答對：<span id="correct-count" class="score-highlight">0</span> 題
+      </div>
+      <button class="reset-btn" onclick="resetQuiz()">↻ 重新作答</button>
+    </div>
+
+    <div id="quiz-container"></div>
+
+    <!-- 網頁最下方：簡報下載 -->
+    <div class="download-box">
+      <div class="download-info">
+        <h3>📑 簡報下載</h3>
+        <p>完整整理本篇 Sarafino Ch.10 文獻各節內容、研究數據與表格（共 18 頁 .pptx 簡報檔）。</p>
+      </div>
+      <a href="../slides/2026-11-hospital-psych.pptx" download="Sarafino_Ch10_住院心理學完整簡報.pptx" class="download-btn">
+        ↓ 下載簡報 (.pptx)
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const quizData = [
+      {
+        q: "1. 根據 Sarafino 第十章序言中 Norman Cousins 的住院親身經歷，他對醫院常規作法提出強烈批評，主要是因為下列哪兩件事？",
+        opts: [
+          "A. 醫院拒絕提供止痛藥物，且病房溫度過低",
+          "B. 四個不同部門在同一天各自抽血未協調，以及隨意喚醒熟睡病患進行例行檢查",
+          "C. 醫師拒絕告知診斷結果，且護理師態度冷漠",
+          "D. 病房缺乏娛樂設施，且家屬探病時間過短"
+        ],
+        ans: 1,
+        exp: "Norman Cousins 罹患僵直性脊椎炎住院時，一天內被四個不同部門的檢驗師分別抽了四次血，且睡眠頻頻被例行公事打斷，讓他認為住院環境反而不利重症者休養。"
+      },
+      {
+        q: "2. 美國醫療保險制度採用「預付制度 (Prospective-Payment System, PPS)」並依據診斷關聯群 (DRG) 給付費用後，對醫院運作產生了什麼主要影響？",
+        opts: [
+          "A. 醫院傾向延長病患住院天數以增加收入",
+          "B. 醫院減少門診手術比例，全面改為住院治療",
+          "C. 平均住院天數顯著下降，更多醫療程序轉向門診與居家照護進行",
+          "D. 醫院大幅增加護理人力編制以降低死亡率"
+        ],
+        ans: 2,
+        exp: "PPS 採取定額給付，若病患提早康復出院醫院可保留結餘，促使 1980 年代後出院率與平均住院天數大幅下降，更多檢查與手術改在門診或居家完成。"
+      },
+      {
+        q: "3. 關於院內感染 (Nosocomial infection) 的敘述，下列何者正確？",
+        opts: [
+          "A. 美國住院病患中僅不到 0.1% 會發生院內感染",
+          "B. 普通門診區的院內感染率遠高於加護病房 (ICU)",
+          "C. 感染控制護理師 (ICN) 在臨床上糾正醫師未遵守感控規定的比例，通常低於糾正護理師或檢驗師",
+          "D. 只要舉辦過一次感控教育訓練，醫護人員的洗手順從度即可永久維持"
+        ],
+        ans: 2,
+        exp: "醫院內存在明顯的權力階層文化，研究（Raven & Haley, 1982）發現感染控制護理師 (ICN) 較常糾正護理師或技師，而較不敢直接指正階級較高的醫師。"
+      },
+      {
+        q: "4. 社會學家 Erving Goffman 將醫護人員把病患當成「不在場的物體（nonperson treatment）」對待的現象稱為什麼？心理學家 Zimbardo 也曾親身經歷此現象。",
+        opts: [
+          "A. 心理抗拒 (Reactance)",
+          "B. 去個人化 (Depersonalization)",
+          "C. 習得無助 (Learned helplessness)",
+          "D. 情緒耗竭 (Emotional exhaustion)"
+        ],
+        ans: 1,
+        exp: "去個人化（Depersonalization）是指醫護人員將病患視為待修理的物體而非有感受的人，Zimbardo 曾描述自己眼部受傷躺在手術台上時，醫師完全不與他對話而只問旁人他的職業。"
+      },
+      {
+        q: "5. 根據 Maslach 與 Jackson (1982) 針對助人專業與醫療人員過勞 (Burnout) 的研究，下列發現何者正確？",
+        opts: [
+          "A. 護理師在「去個人化」向度的得分最高",
+          "B. 醫師對「個人成就感」的不滿意度最低（成就感相對最高）",
+          "C. 花在「直接照護病患」的時間越少，情緒耗竭風險越高",
+          "D. 護理師過勞程度與院內感染率之間沒有任何關聯"
+        ],
+        ans: 1,
+        exp: "研究顯示護理師的去個人化程度最低（可能與性別與同理心有關），醫師則因高薪與地位而有較高的成就感；此外，直接照護病患時間越長，情緒耗竭風險越高。"
+      },
+      {
+        q: "6. Judith Lorber (1975) 研究住院病患的「病人角色行為」，將順從、安靜、不抱怨的病患稱為「好病人」。這類好病人長期下來最容易面臨哪種心理風險？",
+        opts: [
+          "A. 產生強烈的心理抗拒 (Reactance) 並與醫護起衝突",
+          "B. 因為缺乏控制感而陷入習得無助與憂鬱",
+          "C. 出現躁症發作與過度亢奮行為",
+          "D. 提早被醫院強制安排出院"
+        ],
+        ans: 1,
+        exp: "好病人往往壓抑疑問與需求，Raps 等人研究指出住院環境容易讓人學會「無助」，即使身體逐漸康復，無助感與憂鬱仍可能隨住院時間增加。"
+      },
+      {
+        q: "7. 當一位病情並不算特別嚴重的住院病患，卻頻繁抱怨、拒絕配合常規且要求大量關注時，醫護人員常將其視為「問題病人」。從心理學角度來看，這類行為最可能源於什麼機制？",
+        opts: [
+          "A. 自由與個人控制感受到威脅而引發的心理抗拒 (Reactance)",
+          "B. 典型的雙相情緒障礙症躁期發作",
+          "C. 對醫護人員產生過度理想化的移情作用",
+          "D. 麻醉藥物引起的譫妄後遺症"
+        ],
+        ans: 0,
+        exp: "根據 Brehm (1966) 的心理抗拒理論，當個體感到行動自由與控制權被剝奪時，會產生憤怒與反抗行為以試圖重獲控制感。"
+      },
+      {
+        q: "8. 關於住院病患在意外受傷或生病後的「歸因責怪 (Attributing blame)」與心理適應之關係，實證研究（如 Bulman & Wortman, 1977）顯示：",
+        opts: [
+          "A. 自責的病患永遠比責怪他人的病患適應更差",
+          "B. 責怪他人往往伴隨強烈的「不公平感」，因此與較差的心理適應有更強的關聯",
+          "C. 歸因方式與住院後的憂鬱程度完全無關",
+          "D. 認為一切都是運氣不好的人復原速度最快"
+        ],
+        ans: 1,
+        exp: "雖然自責與責怪他人皆不利適應，但責怪他人（例如車禍導致自己癱瘓，肇事者卻只受輕傷）會引發強烈的憤怒與不公平感，使心理調適更為困難。"
+      },
+      {
+        q: "9. 關於全身麻醉期間病患的聽覺與訊息處理研究（Evans & Richardson, 1988），下列敘述何者正確？",
+        opts: [
+          "A. 全身麻醉時大腦完全無法接收任何外界語音刺激",
+          "B. 麻醉期間給予「復原速度取決於你自己」等正向建設性建議，有助於術後較快復原且併發症較少",
+          "C. 麻醉期間醫護人員的負面評論不會對病患產生任何影響",
+          "D. 病患醒來後能逐字背誦麻醉期間聽到的所有對話"
+        ],
+        ans: 1,
+        exp: "研究發現病患在全身麻醉下雖無法有意識地回憶細節，但仍能處理大意與情緒訊息；正向建議能促進術後恢復，反之手術室中的負面言論則可能造成不良影響。"
+      },
+      {
+        q: "10. Kulik 與 Mahler (1987) 針對等待冠狀動脈繞道手術的男性病患進行「病房室友安排」實驗，結果發現哪一種室友安排最能降低病患術前焦慮並讓其提早 1.4 天出院？",
+        opts: [
+          "A. 獨自一人住單人病房，完全不受干擾",
+          "B. 與同樣正在等待手術的病患同房，互相打氣",
+          "C. 與已經開完刀、正在順利復原的病患同房",
+          "D. 與內科慢性病患同房，轉移注意力"
+        ],
+        ans: 2,
+        exp: "與「已術後復原的室友」同房能提供正向社會比較與具體復原示範；反之，兩位都在等開刀的病患同房反而容易產生焦慮的「情緒傳染」。"
+      },
+      {
+        q: "11. 在術前心理準備中，教導病患「在感到焦慮時，將注意力從手術的不適感轉移到手術帶來的健康益處上」，這屬於哪一種控制感介入？",
+        opts: [
+          "A. 行為控制 (Behavioral control)",
+          "B. 認知控制 (Cognitive control)",
+          "C. 資訊控制 (Informational control)",
+          "D. 生理回饋控制 (Biofeedback control)"
+        ],
+        ans: 1,
+        exp: "Langer, Janis & Wolfer (1975) 的經典實驗即透過認知控制訓練，教導病患重新評估並聚焦手術的正向益處，成功減少術前與術後壓力行為及止痛藥需求。"
+      },
+      {
+        q: "12. Erling Anderson (1987) 針對心臟繞道手術病患進行術前心理準備實驗，發現結合「資訊控制＋行為控制」的組別，將術後 12 小時內發生「急性高血壓」的比例從標準準備組的 75% 降至多少？",
+        opts: [
+          "A. 65%",
+          "B. 40%",
+          "C. 15%",
+          "D. 5%"
+        ],
+        ans: 1,
+        exp: "標準準備組有 75% 出現急性高血壓需用藥控制，單純資訊控制組降至 45%，而「資訊＋行為控制組」更降至 40%，顯示心理準備能直接改善生理指標。"
+      },
+      {
+        q: "13. 針對病患「無法主動採取行動配合、必須保持靜止」的侵入性檢查（如心導管檢查 Cardiac catheterization），哪兩種控制感準備最為有效？",
+        opts: [
+          "A. 認知控制與資訊控制",
+          "B. 僅需行為控制",
+          "C. 藥物鎮靜控制與環境隔離",
+          "D. 肌肉緊繃訓練與疼痛耐受測試"
+        ],
+        ans: 0,
+        exp: "心導管檢查時病患無法透過動作加速流程（缺乏行為控制空間），因此 Kendall 等人 (1979) 證實給予「認知控制」與「資訊控制」最能降低檢查期間的焦慮。"
+      },
+      {
+        q: "14. 根據 Miller 與 Mangan (1983) 對「監控型 (Monitors)」與「鈍化型 (Blunters)」因應風格的實驗研究，下列臨床做法何者最符合實證建議？",
+        opts: [
+          "A. 不論病患風格為何，一律提供越詳盡的醫療細節越好",
+          "B. 對鈍化型 (Blunters) 病患提供精簡資訊、對監控型 (Monitors) 提供詳盡資訊，讓準備內容適配其因應風格",
+          "C. 對監控型 (Monitors) 病患隱瞞檢查過程，以免他們過度思考",
+          "D. 鈍化型 (Blunters) 病患完全不需要任何術前準備"
+        ],
+        ans: 1,
+        exp: "實驗結果顯示「風格不匹配」（如給 Blunter 過多資訊，或給 Monitor 太少資訊）會導致檢查後脈搏維持高檔、壓力最大；心理準備應量身適配病患的因應風格。"
+      },
+      {
+        q: "15. Shipley 等人 (1978) 針對胃鏡檢查前觀看衛教錄影帶的研究發現，習慣採取「逃避策略 (Avoidance copers)」的病患，在下列哪種情況下焦慮最低？",
+        opts: [
+          "A. 只觀看一次衛教錄影帶",
+          "B. 重複觀看衛教錄影帶三次（或觀看無關影片）",
+          "C. 在檢查前 1 分鐘才被口頭告知細節",
+          "D. 閱讀十頁純文字醫學論文"
+        ],
+        ans: 1,
+        exp: "逃避型因應者若只看一次衛教片會被喚起焦慮卻來不及消化，反而比不看更焦慮；但若重複觀看三次，透過減敏與熟悉化效果，焦慮反而能顯著下降。"
+      },
+      {
+        q: "16. 跨文化研究顯示，嬰幼兒在面對與主要照顧者短暫分離時，出現「分離痛苦 (Separation distress)」的比例大約在幾個月大時達到最高峰？",
+        opts: [
+          "A. 6 個月大",
+          "B. 15 個月大",
+          "C. 30 個月大（2歲半）",
+          "D. 48 個月大（4歲）"
+        ],
+        ans: 1,
+        exp: "如圖 10-4 所示，無論在美國或瓜地馬拉等不同文化中，嬰幼兒短暫分離痛苦的高峰皆出現在約 15 個月大，之後隨年齡增長逐步下降。"
+      },
+      {
+        q: "17. 關於住院兒童的心理準備與父母陪伴技巧，下列哪一項做法是實證研究「不建議」的？",
+        opts: [
+          "A. 讓 7 歲以下幼兒在醫療程序前不久再接受簡明說明，7 歲以上大孩子則可提前幾天準備",
+          "B. 讓病童觀看年齡相仿孩童順利完成手術的示範影片（如 Ethan Has an Operation）",
+          "C. 在抽血或打針時，父母不斷對孩子重複說「不要擔心、別害怕」來安撫",
+          "D. 在打針時引導孩子看牆上的圖畫或玩具以轉移注意力"
+        ],
+        ans: 2,
+        exp: "McMurtry 等人 (2010) 研究發現，當父母不斷說「別擔心 (Don't worry)」時，兒童反而會解讀為「父母自己很害怕、一定有可怕的事要發生」，轉移注意力才真正有效。"
+      },
+      {
+        q: "18. 臨床心理師在綜合醫院使用 MMPI-2 評估內科住院病患時，最常關注哪三個構成「神經質三聯徵」且與心身症及醫囑不順從高度相關的量表？",
+        opts: [
+          "A. 偏執 (Pa)、思覺失調 (Sc)、輕躁 (Ma)",
+          "B. 慮病 (Hs)、憂鬱 (D)、歇斯底里 (Hy)",
+          "C. 精神病態 (Pd)、男性化-女性化 (Mf)、社會內向 (Si)",
+          "D. 說謊 (L)、詐病 (F)、校正 (K)"
+        ],
+        ans: 1,
+        exp: "MMPI-2 的 Hs（慮病）、D（憂鬱）與 Hy（歇斯底里）三量表高分者常有心身症傾向，且憂鬱量表高分往往能預測癌症或心臟病患無法配合治療計畫。"
+      },
+      {
+        q: "19. 關於兒童對「死亡」概念的認知發展，大約在幾歲左右，多數兒童才能理解死亡是「普遍發生於所有人、不可逆轉，且代表生理機能停止」？",
+        opts: [
+          "A. 3 歲",
+          "B. 5 歲",
+          "C. 8 歲",
+          "D. 13 歲"
+        ],
+        ans: 2,
+        exp: "5 歲前幼兒常以為死亡只是去另一個地方或睡著（可逆）；大約到了 8 歲，多數兒童才建立成熟的死亡概念（普遍性、最終不可逆性、功能停止）。"
+      },
+      {
+        q: "20. 關於英國醫師 Cicely Saunders 所倡導的「安寧療護 (Hospice Care)」核心理念與實證成效，下列敘述何者正確？",
+        opts: [
+          "A. 安寧療護僅能設於大型醫院的獨立大樓內，無法在病患家中提供服務",
+          "B. 安寧療護的核心目標是積極使用侵入性維生設備延長病患心跳呼吸",
+          "C. 安寧療護同時照顧病患與全體家屬的身心靈需求，並包含病患過世後的家屬哀傷追蹤關懷",
+          "D. 研究顯示安寧病房病患的焦慮程度與傳統一般病房並無差異"
+        ],
+        ans: 2,
+        exp: "安寧療護可採居家或住院形式，強調尊重病患善終地點選擇、發揮最大生活潛能、減輕疼痛、照顧家屬情緒並提供喪親後哀傷追蹤，實證顯示病患焦慮更低、家屬滿意度更高。"
+      }
+    ];
+
+    let answeredCount = 0;
+    let correctCount = 0;
+
+    function renderQuiz() {
+      const container = document.getElementById("quiz-container");
+      container.innerHTML = "";
+      answeredCount = 0;
+      correctCount = 0;
+      updateScore();
+
+      quizData.forEach((item, qIdx) => {
+        const card = document.createElement("div");
+        card.className = "mcq-card";
+
+        const qTitle = document.createElement("div");
+        qTitle.className = "mcq-question";
+        qTitle.textContent = item.q;
+        card.appendChild(qTitle);
+
+        const optGroup = document.createElement("div");
+        optGroup.className = "mcq-options";
+
+        const expBox = document.createElement("div");
+        expBox.className = "mcq-explanation";
+        expBox.innerHTML = `<strong>✿ 解析：</strong>${item.exp}`;
+
+        item.opts.forEach((optText, oIdx) => {
+          const btn = document.createElement("button");
+          btn.className = "mcq-opt-btn";
+          btn.textContent = optText;
+          btn.onclick = () => {
+            const allBtns = optGroup.querySelectorAll(".mcq-opt-btn");
+            allBtns.forEach(b => b.disabled = true);
+
+            answeredCount++;
+            if (oIdx === item.ans) {
+              btn.classList.add("correct");
+              correctCount++;
+            } else {
+              btn.classList.add("wrong");
+              allBtns[item.ans].classList.add("correct");
+            }
+            expBox.style.display = "block";
+            updateScore();
+          };
+          optGroup.appendChild(btn);
+        });
+
+        card.appendChild(optGroup);
+        card.appendChild(expBox);
+        container.appendChild(card);
+      });
+    }
+
+    function updateScore() {
+      document.getElementById("answered-count").textContent = answeredCount;
+      document.getElementById("correct-count").textContent = correctCount;
+    }
+
+    function resetQuiz() {
+      renderQuiz();
+      document.querySelector(".quiz-scoreboard").scrollIntoView({ behavior: "smooth" });
+    }
+
+    renderQuiz();
+  </script>
+</body>
+</html>

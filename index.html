@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>臨床心理學課程講義速版</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #faf8f5;
+      --bg-card: #fffefc;
+      --text-primary: #4a4542;
+      --text-secondary: #7c746e;
+      --border: #ebe5dd;
+      --primary: #c98a8a;
+      --primary-light: #f6eaea;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Zen Maru Gothic", "Noto Sans TC", -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-main);
+      background-image: radial-gradient(#e6dfd5 1px, transparent 1px);
+      background-size: 24px 24px;
+      color: var(--text-primary);
+      line-height: 1.7;
+      padding: 48px 20px;
+    }
+    .container { max-width: 960px; margin: 0 auto; }
+    header {
+      background: var(--bg-card); padding: 34px 36px; border-radius: 24px;
+      border: 1.5px solid var(--border); margin-bottom: 28px;
+      box-shadow: 0 6px 20px rgba(138, 121, 108, 0.06);
+      position: relative;
+    }
+    .header-tag {
+      display: inline-block; background: var(--primary-light); color: #a86b6b;
+      font-size: 0.8rem; font-weight: 700; padding: 4px 14px; border-radius: 999px;
+      margin-bottom: 10px; letter-spacing: 0.04em;
+    }
+    header h1 { font-size: 1.85rem; margin-bottom: 8px; color: var(--text-primary); letter-spacing: 0.02em; }
+    header p { color: var(--text-secondary); font-size: 0.98rem; }
+
+    .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 26px; }
+    .filter-btn {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      padding: 8px 18px; border-radius: 999px; cursor: pointer;
+      font-family: inherit; font-size: 0.9rem; font-weight: 500;
+      color: var(--text-secondary); transition: all 0.25s ease;
+    }
+    .filter-btn:hover { border-color: var(--primary); color: #a86b6b; background: var(--primary-light); }
+    .filter-btn.active {
+      background: var(--primary); color: #ffffff; border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(201, 138, 138, 0.28);
+    }
+
+    .lecture-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(295px, 1fr)); gap: 22px; }
+    .lecture-card {
+      background: var(--bg-card); border: 1.5px solid var(--border);
+      border-radius: 20px; padding: 26px; text-decoration: none; color: inherit;
+      display: flex; flex-direction: column; transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      box-shadow: 0 6px 20px rgba(138, 121, 108, 0.05);
+    }
+    .lecture-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(138, 121, 108, 0.11);
+      border-color: #d8c3b8;
+    }
+    .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .badge { font-size: 0.78rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; }
+    .badge-assessment { background: #e4edf2; color: #567285; }
+    .badge-therapy { background: #e5efe8; color: #547360; }
+    .badge-psychopathology { background: #f7e8e0; color: #9c6654; }
+    .badge-neuro { background: #ede7f3; color: #716187; }
+    .badge-health { background: #e2f1ee; color: #4d7870; }
+    .date { font-size: 0.8rem; color: #a89f97; }
+    .lecture-card h3 { font-size: 1.15rem; margin-bottom: 10px; line-height: 1.45; color: var(--text-primary); }
+    .lecture-card p { font-size: 0.92rem; color: var(--text-secondary); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="header-tag">✿ 臨床心理學小手帳</span>
+      <h1>臨床心理學課程講義速版</h1>
+      <p>聚焦核心考點、20 題互動選擇題庫與同風格簡報下載的極速複習知識庫。</p>
+    </header>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">全部講義</button>
+      <button class="filter-btn" data-filter="心理衡鑑">心理衡鑑</button>
+      <button class="filter-btn" data-filter="心理治療">心理治療</button>
+      <button class="filter-btn" data-filter="精神病理學">精神病理學</button>
+      <button class="filter-btn" data-filter="神經心理學">神經心理學</button>
+      <button class="filter-btn" data-filter="健康心理學">健康心理學</button>
+    </div>
+
+    <div class="lecture-grid">
+      <!-- AI 新增講義時會在此處上方插入新卡片 -->
+      <a href="notes/2026-11-hospital-psych.html" class="lecture-card" data-category="健康心理學">
+        <div class="card-top">
+          <span class="badge badge-health">健康心理學</span>
+          <span class="date">2026-11-13</span>
+        </div>
+        <h3>住院情境、醫療程序與病患心理適應（Sarafino Ch.10）</h3>
+        <p>含 20 題互動選擇題庫與同風格簡報下載！掌握去個人化、術前控制感與安寧照護考點。</p>
+      </a>
+
+      <a href="notes/2026-11-mdd-vs-bipolar.html" class="lecture-card" data-category="精神病理學">
+        <div class="card-top">
+          <span class="badge badge-psychopathology">精神病理學</span>
+          <span class="date">2026-11-13</span>
+        </div>
+        <h3>重鬱症 (MDD) 與雙相情緒障礙症的鑑別診斷要點</h3>
+        <p>釐清單極與雙極情緒障礙的病程特徵、躁症發作門檻與誤診風險。</p>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.lecture-card');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          card.style.display = (filter === 'all' || card.dataset.category === filter) ? 'flex' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
